@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>模拟拖放</title>
+		<style>
+			#mydiv1{
+				background: red;
+				width: 100px;
+				height: 100px;
+				position: absolute;
+			}
+			#mydiv2{
+				background: blue;
+				width: 100px;
+				height: 100px;
+				position: absolute;
+				left: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='mydiv1' class="draggable"></div>
+		<div id='mydiv2' class="draggable"></div>
+		<script type="text/javascript">
+			var DragDrop=function(){
+				var dragging=null;
+				var diffX=0,diffY=0
+				function handleEvent(event){
+					var target=event.target
+					switch(event.type){
+						case "mousedown":
+						if(target.className.indexOf("draggable")>-1){
+							dragging=target
+							diffX=event.clientX-target.offsetLeft
+							diffY=event.clientY-target.offsetTop
+						}
+						break
+						case "mouseover":
+						if(dragging !==null){
+							dragging.style.left=(event.clientX-diffX)+"px"
+							dragging.style.top=(event.clientY-diffY)+"px"
+						}
+						break
+						case "mouseup":
+							dragging=null
+						break
+					}
+				}
+				//公开的接口
+				return{
+					enable:function(){
+						document.addEventListener('mousedown',handleEvent)
+						document.addEventListener('mouseover',handleEvent)
+						document.addEventListener('mouseup',handleEvent)
+					},
+					disable:function(){
+						document.addEventListener('mousedown',handleEvent)
+						document.addEventListener('mouseover',handleEvent)
+						document.addEventListener('mouseup',handleEvent)
+					}
+				}
+				
+			}()
+			
+			DragDrop.enable()
+			
+		</script>
+	</body>
+</html>

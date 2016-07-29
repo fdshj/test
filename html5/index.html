@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>html5交互</title>
+		<style>
+			#div3{border:1px dashed #FF0000;height:50px;width:50px;background: linear-gradient(to bottom,red,blue);}
+			#div4{border:1px dashed #FF0000;height:50px;width:50px;background: -webkit-linear-gradient(45deg,black,blue);}
+			#div5{border:1px dashed #FF0000;width:50px;height:50px;background-image: -webkit-radial-gradient(circle,red,blue,white 20%);}
+		#div6{border:1px dashed #FF0000;width:50px;height:50px;background-image: -webkit-repeating-linear-gradient(-45deg,red,red 5px,white 5px,white 10px);}
+		#div7{border:1px dashed #FF0000;width:50px;height:50px;background-image: -webkit-repeating-radial-gradient(circle,red,blue,white 20%);}
+		
+		#div8{width:100px;height:100px;position:relative;padding:5px;
+		background:#darkcyan;border:1px solid #0000FF;transition: all 8s;}
+		
+		#div8:hover{left:100px;}
+		#div9{width:100px;height:100px;
+		background:#0000FF;
+		-webkit-transition: width 2s,height 2s,background-color 2s,-webkit-transform:2s;
+		}
+		#div9:hover{width: 200px;height: 200px;background-color: #FFCCCC;-webkit-transform: 180deg;}
+		</style>
+		
+	</head>
+	<body>
+		<--这个是下拉展示-->
+		<details>
+			<summary>我是摘要，点击展开</summary>
+			<p>这是展示内容</p>
+			<p>这是展示内容</p>
+		</details>
+		<hr />
+		<div style="border: 1px solid red;width: 100px;">
+			<div id="div1" style="border: 1px solid blue;margin-top: 50px;background-color: green;height: 50px;width: 50px;"></div>
+			<div id="div2" style="margin-top: 100px">B</div>
+		</div>
+		<hr />
+		<!--
+        	作者：fdshj111@163.com
+        	时间：2016-06-12
+        	描述：颜色渐变
+        -->
+		<div id="div3"></div>
+		<div id="div4"></div>
+		<div id="div5"></div>
+		<div id="div6"></div>
+		<div id="div7"></div>
+		<hr />
+		<div id="div8">hover右移</div>
+		<div id="div9"></div>
+		<hr />
+		
+		
+		<svg width="320" height="200" xmlns="http://www.w3.org/2000/svg">
+		   <!--<text font-family="microsoft yahei" font-size="120" y="160" x="160">马-->
+		    	<image xlink:href="img/1.png" x="60" y="160" height="50px" width="50px"/>
+		    	
+		        <animate attributeName="x" from="60" to="160" begin="0s" dur="3s" repeatCount="indefinite" />
+		        <animate attributeName="opacity" from="1" to="0" begin="0s" dur="3s" repeatCount="indefinite" />
+		   <!--</text>-->
+		</svg>
+		<hr />
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>app</title>
+		<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+		<script>
+			$(function(){
+				if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+					$('a').click(function(){
+						window.location="../startFunction";
+					})
+				} else if (/(Android)/i.test(navigator.userAgent)) {
+					  $('a').click(function(){
+						window.wst.startFunction();
+					})
+				} else {
+				   
+				};
+
+			})
+			
+		</script>
+	</head>
+	
+	<body>
+		<a id='backButton'>点击测试</a>
+	</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>查询通知书</title>
+		<link href="https://res.wx.qq.com/open/libs/weui/0.4.2/weui.css" rel="stylesheet">
+		<style type="text/css">
+			body {
+				background: #efeff4;
+			}
+			
+			.ems_logo {
+				position: relative;
+				height: 44px;
+				width: 100%;
+				background: #d9d9d9;
+			}
+			
+			.ems_logo .center {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-top: -10px;
+				margin-left: -111px;
+				font-size: 16px;
+				color: #323232;
+			}
+			
+			.ems_logo .center img {
+				height: 20px;
+				vertical-align: middle;
+				float: left;
+			}
+			
+			.ems_logo .center span {
+				padding-left: 15px;
+				font-weight: 600;
+				display: block;
+				float: left;
+				line-height: 20px;
+			}
+			
+			.input_wrap {
+				margin: 40px 15px 0px 15px;
+				border: 1px solid #d5d5d5;
+				border-radius: 5px;
+				height: 44px;
+				padding: 0 10px;
+				background: #fff;
+			}
+			
+			.input_wrap .input_box {
+				width: 100%;
+			}
+			
+			.input_wrap .input_box input {
+				font-size: 16px;
+			}
+			
+			.weui_cell:before {
+				border: none;
+			}
+			
+			.weui_cells {
+				background: #efeff4;
+			}
+			
+			.weui_cells:before {
+				border: none;
+			}
+			
+			.weui_cells:after {
+				border: none;
+			}
+			
+			.weui_btn_ok {
+				margin-top: 60px;
+			}
+			
+			.weui_btn_ok .bd {
+				margin-top: 20px;
+				padding: 0 15px;
+			}
+			
+			.wei_error {
+				width: 100%;
+				float: left;
+				background: #efeff4;
+			}
+			
+			.wei_error span {
+				padding: 10px 15px 0;
+				display: block;
+				color: #ef2827;
+			}
+			
+			.layout_footer {
+				height: 58px;
+				position: fixed;
+				clear: both;
+				bottom: 0;
+				right: 0;
+				left: 0;
+				text-align: center;
+				background-color: #EFEFF4;
+			}
+			
+			.layout_footer span {
+				display: inline-block;
+				width: 100%;
+				font-size: 11px;
+				color: #b2b2b2;
+				line-height: 24px;
+				margin-top: 8px;
+			}
+			
+			.search_input {
+				width: 100%;
+				color: #000;
+			}
+		</style>
+		<style type="text/css">
+			body {
+				height: 100%;
+				position: relative;
+			}
+			
+			.state {
+				position: relative;
+				height: 85px;
+				widht: 100%;
+				border-bottom: 1px solid #d5d5d5;
+				background: #ffffff;
+			}
+			
+			.state .center {
+				position: absolute;
+				left: 50%;
+				margin-left: -55px;
+				top: 50%;
+				margin-top: -15px;
+				height: 30px;
+				line-height: 30px;
+			}
+			
+			.state .center .img_box {
+				display: inline-block;
+			}
+			
+			.state .center .img_box img {
+				height: 30px;
+				vertical-align: middle;
+				float: left;
+			}
+			
+			.state .center .img_box span {
+				padding-left: 15px;
+				font-weight: 600;
+				float: left;
+				display: block;
+				line-height: 35px;
+			}
+			
+			.main {
+				margin: 10px 0 20px 0;
+				border-top: 1px solid #d5d5d5;
+				border-bottom: 1px solid #d5d5d5;
+				background: #ffffff;
+			}
+			
+			.layout_footer span img {
+				display: inline-block;
+				height: 10px;
+			}
+			
+			.no_date_content {
+				margin: 15px 15px 20px 15px;
+				font-size: 14px;
+			}
+			
+			.no_date_content .title {
+				color: #04be02;
+				margin: 15px 0;
+			}
+			
+			.no_date_content .information {
+				color: #323232;
+			}
+			
+			.information_wrap {
+				margin: 0 15px;
+			}
+			
+			.information_wrap .awb {
+				font-size: 14px;
+				color: #323232;
+				font-weight: 600;
+				padding-bottom: 10px;
+				margin-top: 20px;
+			}
+			
+			.information_wrap .information_all {
+				position: relative;
+				max-height: 200px;
+				overflow: auto;
+			}
+			
+			.information_wrap .information_all span {
+				left: 0;
+				top: 0;
+				margin-left: 5px;
+				position: absolute;
+				background: #fff;
+				width: 10px;
+				height: 22px;
+				display: inline-block;
+			}
+			
+			.information_wrap .information_all .information_more {
+				border-left: 1px solid #bdbdbd;
+				padding: 0 0 0 25px;
+				margin: 0 10px;
+				font-size: 14px;
+			}
+			
+			.information_wrap .information_all .information_more .information_state {
+				font-size: 14px;
+			}
+			
+			.information_wrap .information_all .information_more .information_box {
+				color: #7d7d7d;
+				position: relative;
+				font-size: 14px;
+				border-bottom: 1px solid #d5d5d5;
+				padding-bottom: 15px;
+				margin-top: 15px;
+			}
+			
+			.information_wrap .information_all .information_more .information_box .information_time {
+				margin-top: 10px;
+			}
+			
+			.information_wrap .information_all .information_more .information_box:after {
+				content: '';
+				display: inline-block;
+				position: absolute;
+				left: -31px;
+				top: 5px;
+				width: 8px;
+				height: 8px;
+				-webkit-border-radius: 10px;
+				background: #d5d5d5;
+				border: 2px solid #EEE;
+			}
+			
+			.information_wrap .information_all .information_more .information_box:first-child {
+				color: #04be02;
+			}
+			
+			.information_wrap .information_all .information_more .information_box:last-child {
+				border-bottom: none;
+			}
+			
+			.information_wrap .information_all .information_more .information_box:first-child:after {
+				background: #04be02;
+			}
+			
+			.information_wrap .information_all .information_more:nth-child(1) {
+				padding: 0 0 0 25px;
+				margin-top: 10px;
+			}
+			
+			.information_wrap .information_all .information_more:last-child {
+				border-bottom: none;
+			}
+			
+			.good_list_wrap {
+				height: 38px;
+				margin: 20px 15px 0 15px;
+				border: 1px solid #d5d5d5;
+				border-radius: 4px;
+			}
+			
+			.good_list_wrap .l_btn {
+				float: left;
+				border-right: 1px solid #d5d5d5;
+			}
+			
+			.good_list_wrap .r_btn {
+				float: right;
+			}
+			
+			.good_list_wrap .btn {
+				position: relative;
+				width: 25px;
+				height: 38px;
+				line-height: 38px;
+			}
+			
+			.good_list_wrap .btn canvas {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -5px;
+				margin-top: -10px;
+			}
+			
+			.good_list_wrap .list_box {
+				position: relative;
+				float: left;
+				width: 100%;
+				height: 38px;
+				overflow: hidden;
+			}
+			
+			.good_list_wrap .list_box .list {
+				position: absolute;
+				left: 0px;
+				height: 38px;
+			}
+			
+			.good_list_wrap .list_item {
+				display: inline-block;
+				height: 38px;
+				line-height: 38px;
+				border-right: 1px solid #d5d5d5;
+				text-align: center;
+			}
+			
+			.good_list_wrap .active {
+				height: 36px;
+				line-height: 36px;
+				background: #e1f4e1;
+				border: 1px solid #04be02;
+			}
+			
+			.bd {
+				padding: 0 15px;
+			}
+			
+			.layout_footer {
+				height: 58px;
+				position: fixed;
+				clear: both;
+				bottom: 0;
+				right: 0;
+				left: 0;
+				text-align: center;
+				background-color: #EFEFF4;
+			}
+			
+			.layout_footer span {
+				display: inline-block;
+				width: 100%;
+				font-size: 11px;
+				color: #b2b2b2;
+				line-height: 24px;
+				margin-top: 8px;
+			}
+			
+			.mbox {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				z-index: 3;
+				background-color: #EFEFF4;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<body>
+			<div id="box">
+				<div data-reactroot="">
+					<div class="state">
+						<div class="center">
+							<div class="img_box"><img src="src/images/signIn.png"><span>已签收</span></div>
+						</div>
+					</div>
+					<div class="main">
+						<div></div>
+						<div>
+							<div class="information_wrap">
+								<p class="awb">
+									<!-- react-text: 12 -->运单号码：
+									<!-- /react-text -->
+
+									<!-- react-text: 13 -->1174515919807
+									<!-- /react-text -->
+								</p>
+								<div class="information_all" style="max-height: 342px;"><span></span>
+									<div class="information_more">
+										<div class="information_box">
+											<div class="information_state">杭州市投递并签收，签收人：本人收</div>
+											<p class="information_time acceptTime">2016-07-09 18:10:31</p>
+										</div>
+										<div class="information_box">
+											<div class="information_state">杭州市杭州市邮政速递西区分公司留下揽投站安排投递（投递员姓名：王航18069888745;联系电话：18069888745）</div>
+											<p class="information_time acceptTime">2016-07-09 10:11:20</p>
+										</div>
+										<div class="information_box">
+											<div class="information_state">杭州市到达 杭州速递邮件处理中心 处理中心</div>
+											<p class="information_time acceptTime">2016-07-09 01:47:00</p>
+										</div>
+										<div class="information_box">
+											<div class="information_state">丽水市已离开丽水市邮政速递物流公司，发往杭州速递邮件处理中心</div>
+											<p class="information_time acceptTime">2016-07-08 20:50:00</p>
+										</div>
+										<div class="information_box">
+											<div class="information_state">丽水市丽水市分公司莲都揽投部已收件（揽投员姓名：窗口,联系电话:2230810）</div>
+											<p class="information_time acceptTime">2016-07-08 18:24:00</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="bd spacing">
+						<a href="javascript:;" class="weui_btn weui_btn_primary add_btn">完成查询</a>
+					</div>
+					<div class="layout_footer"><span><img src="src/images/ems2.png"><!-- react-text: 37 -->&nbsp; 中国邮政提供查询服务<!-- /react-text --><br><!-- react-text: 39 -->热线电话：&nbsp;<!-- /react-text --><a href="tel:11183">11183</a></span></div>
+				</div>
+			</div>
+
+		</body>
+	</body>
+
+</html>
